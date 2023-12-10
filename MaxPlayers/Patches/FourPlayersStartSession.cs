@@ -1,54 +1,12 @@
 ﻿using CG.Client.Quests;
-using CG.Client.Quests.Generation;
-using CG.Game;
-using CG.Game.Player;
 using HarmonyLib;
 using Photon.Pun;
 using System;
-using System.Linq;
 using System.Reflection;
-using ToolClasses;
 using UnityEngine;
 
-namespace MaxPlayers
+namespace MaxPlayers.Patches
 {
-    [HarmonyPatch(typeof(GameSessionManager), "LoadGameSessionNetworkedAssets")]
-    internal class DefaultSessionMaxPlayers
-    {
-        private static FieldInfo activeGameSessioninfo = AccessTools.Field(typeof(GameSessionManager), "activeGameSession");
-        [HarmonyPrefix]
-        public static bool Replacement(GameSessionManager __instance)
-        {
-            GameSession activeGameSession = (GameSession)activeGameSessioninfo.GetValue(__instance);
-            activeGameSession.LoadShip();
-            activeGameSession.SetupProgressTracker();
-            foreach (GameSessionAsset gameSessionAsset in activeGameSession.NetAssets)
-            {
-                gameSessionAsset.InstantiateNetworked(null, null);
-            }
-            activeGameSession.LoadSectorNetworkedObjects();
-            PunSingleton<PhotonService>.Instance.SetCurrentRoomInHub(activeGameSession.IsHub);
-            if (activeGameSession.IsHub)
-            {
-                PhotonNetwork.CurrentRoom.MaxPlayers = Plugin.PlayerCount;
-                return false;
-            }
-            PhotonNetwork.CurrentRoom.MaxPlayers = (byte)Mathf.Min(Plugin.PlayerCount, activeGameSession.MaxPlayerCount);
-            return false;
-        }
-    }
-    [HarmonyPatch(typeof(CloneTube), "IsAvailable")]
-    internal class StackPlayersInCloneTube
-    {
-        private static FieldInfo _occupantInfo = AccessTools.Field(typeof(CloneTube), "_occupant");
-        [HarmonyPrefix]
-        public static bool Replacement(CloneTube __instance, ref bool __result)
-        {
-            Player _occupant = (Player)_occupantInfo.GetValue(__instance);
-            __result = _occupant == null || PhotonNetwork.CurrentRoom.Players.Count > 4;
-            return false;
-        }
-    }
     [HarmonyPatch(typeof(QuestStartProcess), "UpdateQuestProcess")]
     internal class FourPlayersStartSession
     {
@@ -98,24 +56,6 @@ namespace MaxPlayers
             }
             SetSecondsLeftInfo.Invoke(__instance, new object[] { num2 });
             return false;
-        }
-    }
-    [HarmonyPatch(typeof(HubQuestManager), "StartQuest")]
-    internal class ResetForceStart
-    {
-        [HarmonyPostfix]
-        public static void Patch()
-        {
-            StartQuest.ToldToStart = false;
-        }
-    }
-    [HarmonyPatch(typeof(QuestGenerator), "Create")]
-    internal class IncreaseMaximumAllowedPlayers
-    {
-        [HarmonyPostfix]
-        public static void Patch(ref Quest __result)
-        {
-            if (__result.Asset.scenarioSetup.MaximumPlayers >= 4) __result.Asset.scenarioSetup.MaximumPlayers = int.MaxValue;
         }
     }
 }

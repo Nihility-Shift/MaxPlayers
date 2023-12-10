@@ -1,15 +1,15 @@
 ﻿using Gameplay.MissionDifficulty;
 using HarmonyLib;
 
-namespace MaxPlayers
+namespace MaxPlayers.Patches
 {
     [HarmonyPatch(typeof(QuestDifficultyContainer), "GetConfig")]
-    internal class DifficultyConfigPatch
+    internal class QuestDifficultyContainerPatche
     {
         [HarmonyPrefix]
         static void GetConfigPrefix(ref Difficulty df)
         {
-            if((int)df >= 4)
+            if ((int)df >= 4)
             {
                 df = (Difficulty)4;
             }

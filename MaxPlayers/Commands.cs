@@ -1,6 +1,7 @@
 ﻿using CG.Client.Quests;
 using CommandHandler.Chat.Router;
 using CommandHandler.Utilities;
+using MaxPlayers.Patches;
 using Photon.Pun;
 
 namespace MaxPlayers
