@@ -30,10 +30,6 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Void Crew\Void Crew_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CommandHandler">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Void Crew\BepInEx\plugins\CommandHandler.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PhotonRealtime">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Void Crew\Void Crew_Data\Managed\PhotonRealtime.dll</HintPath>
       <Private>False</Private>
@@ -49,6 +45,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Void Crew\Void Crew_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="VoidManager">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Void Crew\BepInEx\plugins\VoidManager.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
