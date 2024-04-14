@@ -24,10 +24,10 @@ namespace MaxPlayers.Patches
             PunSingleton<PhotonService>.Instance.SetCurrentRoomInHub(activeGameSession.IsHub);
             if (activeGameSession.IsHub)
             {
-                PhotonNetwork.CurrentRoom.MaxPlayers = Plugin.PlayerCount;
+                PhotonNetwork.CurrentRoom.MaxPlayers = BepinPlugin.PlayerCount;
                 return false;
             }
-            PhotonNetwork.CurrentRoom.MaxPlayers = (byte)Mathf.Min(Plugin.PlayerCount, activeGameSession.MaxPlayerCount);
+            PhotonNetwork.CurrentRoom.MaxPlayers = (byte)Mathf.Min(BepinPlugin.PlayerCount, activeGameSession.MaxPlayerCount);
             return false;
         }
     }

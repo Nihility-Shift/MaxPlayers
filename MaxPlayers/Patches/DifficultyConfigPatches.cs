@@ -3,18 +3,18 @@ using HarmonyLib;
 
 namespace MaxPlayers.Patches
 {
-    [HarmonyPatch(typeof(QuestDifficultyContainer), "GetConfig")]
+    /*[HarmonyPatch(typeof(QuestDifficultyContainer), "GetConfig")]
     internal class QuestDifficultyContainerPatche
     {
         [HarmonyPrefix]
         static void GetConfigPrefix(ref Difficulty df)
         {
-            if ((int)df >= 4)
+            if ((int)df > 4)
             {
                 df = (Difficulty)4;
             }
         }
-    }
+    }*/
 
     [HarmonyPatch(typeof(DifficultyPlayerCountTable), "GetConfig")]
     internal class DifficultyPlayerCountTablePatch
@@ -22,9 +22,18 @@ namespace MaxPlayers.Patches
         [HarmonyPrefix]
         static void GetConfigPrefix(ref int playerCount)
         {
-            if (playerCount >= 4)
+            int MaxDifficultyConfigPlayerCount = 4;
+            foreach( var thing in DifficultyPlayerCountTable.Instance.setups)
             {
-                playerCount = 4;
+                if (thing.playerCount > MaxDifficultyConfigPlayerCount)
+                {
+                    MaxDifficultyConfigPlayerCount = thing.playerCount;
+                }
+            }
+
+            if (playerCount > MaxDifficultyConfigPlayerCount)
+            {
+                playerCount = MaxDifficultyConfigPlayerCount;
             }
         }
     }

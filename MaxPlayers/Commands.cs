@@ -1,8 +1,7 @@
-﻿using CG.Client.Quests;
-using CommandHandler.Chat.Router;
-using CommandHandler.Utilities;
-using MaxPlayers.Patches;
+﻿using MaxPlayers.Patches;
 using Photon.Pun;
+using VoidManager.Chat.Router;
+using VoidManager.Utilities;
 
 namespace MaxPlayers
 {
@@ -34,10 +33,10 @@ namespace MaxPlayers
             if (args.Length < 1 || !PhotonNetwork.IsMasterClient) return;
             if (int.TryParse(args[0], out int value))
             {
-                Plugin.PlayerCount = (byte)value;
+                BepinPlugin.PlayerCount = (byte)value;
             }
-            if (PhotonNetwork.InRoom) PhotonNetwork.CurrentRoom.MaxPlayers = Plugin.PlayerCount;
-            Messaging.Echo($"Max player count: desired-{Plugin.PlayerCount} : current-{PhotonNetwork.CurrentRoom.MaxPlayers}");
+            if (PhotonNetwork.InRoom) PhotonNetwork.CurrentRoom.MaxPlayers = BepinPlugin.PlayerCount;
+            Messaging.Echo($"Max player count: desired-{BepinPlugin.PlayerCount} : current-{PhotonNetwork.CurrentRoom.MaxPlayers}");
         }
     }
 
