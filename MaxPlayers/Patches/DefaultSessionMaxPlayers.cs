@@ -1,34 +1,41 @@
 ﻿using HarmonyLib;
-using Photon.Pun;
+using System.Collections.Generic;
 using System.Reflection;
-using ToolClasses;
-using UnityEngine;
+using System.Reflection.Emit;
+using static VoidManager.Utilities.HarmonyHelpers;
 
 namespace MaxPlayers.Patches
 {
+    //Remove line setting player limit to ship recommended limit.
+
     [HarmonyPatch(typeof(GameSessionManager), "LoadGameSessionNetworkedAssets")]
     internal class DefaultSessionMaxPlayers
     {
         private static FieldInfo activeGameSessioninfo = AccessTools.Field(typeof(GameSessionManager), "activeGameSession");
         [HarmonyPrefix]
-        public static bool Replacement(GameSessionManager __instance)
+        public static IEnumerable<CodeInstruction> Replacement(IEnumerable<CodeInstruction> instructions)
         {
-            GameSession activeGameSession = (GameSession)activeGameSessioninfo.GetValue(__instance);
-            activeGameSession.LoadShip();
-            activeGameSession.SetupProgressTracker();
-            foreach (GameSessionAsset gameSessionAsset in activeGameSession.NetAssets)
+            CodeInstruction[] targetSequence = new CodeInstruction[]
             {
-                gameSessionAsset.InstantiateNetworked(null, null);
-            }
-            activeGameSession.LoadSectorNetworkedObjects();
-            PunSingleton<PhotonService>.Instance.SetCurrentRoomInHub(activeGameSession.IsHub);
-            if (activeGameSession.IsHub)
-            {
-                PhotonNetwork.CurrentRoom.MaxPlayers = BepinPlugin.PlayerCount;
-                return false;
-            }
-            PhotonNetwork.CurrentRoom.MaxPlayers = (byte)Mathf.Min(BepinPlugin.PlayerCount, activeGameSession.MaxPlayerCount);
-            return false;
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld),
+                new CodeInstruction(OpCodes.Ldfld),
+                new CodeInstruction(OpCodes.Brtrue),
+                new CodeInstruction(OpCodes.Call),
+                new CodeInstruction(OpCodes.Ldarg_0),
+                new CodeInstruction(OpCodes.Ldfld),
+                new CodeInstruction(OpCodes.Ldfld),
+                new CodeInstruction(OpCodes.Ldfld),
+                new CodeInstruction(OpCodes.Call),
+                new CodeInstruction(OpCodes.Callvirt),
+                new CodeInstruction(OpCodes.Call),
+                new CodeInstruction(OpCodes.Conv_U1),
+                new CodeInstruction(OpCodes.Callvirt),
+            };
+
+            CodeInstruction[] patchSequence = new CodeInstruction[] {};
+
+            return PatchBySequence(instructions, targetSequence, patchSequence, PatchMode.REPLACE, CheckMode.NEVER);
         }
     }
 }
