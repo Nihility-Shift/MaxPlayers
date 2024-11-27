@@ -22,21 +22,22 @@ namespace MaxPlayers
     internal class IncreaseCommand : ChatCommand
     {
         public override string[] CommandAliases()
-            => new string[] { "setplayercount", "spc" };
+            => new string[] { "setplayerlimit", "spl" };
 
         public override string Description()
-            => "Count of players.";
+            => "Player Limit";
 
         public override void Execute(string arguments)
         {
             string[] args = arguments.Split(' ');
             if (args.Length < 1 || !PhotonNetwork.IsMasterClient) return;
+
+
             if (int.TryParse(args[0], out int value))
             {
-                BepinPlugin.PlayerCount = (byte)value;
+                Limits.PlayerLimit = value;
             }
-            if (PhotonNetwork.InRoom) PhotonNetwork.CurrentRoom.MaxPlayers = BepinPlugin.PlayerCount;
-            Messaging.Echo($"Max player count: desired-{BepinPlugin.PlayerCount} : current-{PhotonNetwork.CurrentRoom.MaxPlayers}");
+            Messaging.Echo($"Player limit: {Limits.PlayerLimit}";
         }
     }
 
@@ -52,6 +53,13 @@ namespace MaxPlayers
         public override void Execute(string arguments)
         {
             if (!PhotonNetwork.InRoom || !PhotonNetwork.IsMasterClient) return;
+            {
+                Messaging.Notification("Must be host to use this command.", 10000);
+            }
+            if (HubQuestManager.Instance.SelectedQuest == null || HubQuestManager.Instance.CurrentShipSelected == null)
+            {
+                Messaging.Notification("Must have a quest and ship selected.", 10000);
+            }
             ToldToStart = !ToldToStart;
             FourPlayersStartSession.QuestStartProcess.StartProcess();
         }

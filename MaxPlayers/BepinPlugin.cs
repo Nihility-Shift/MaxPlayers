@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 
 namespace MaxPlayers
@@ -9,13 +10,18 @@ namespace MaxPlayers
     public class BepinPlugin : BaseUnityPlugin
     {
         internal static readonly Harmony Harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
-        public static byte PlayerCount = 4;
+
+        internal static ManualLogSource Log;
+
         private void Awake()
         {
             // Plugin startup logic
-            Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+            Log = Logger;
+            Settings.DefaultPlayerLimit = Config.Bind("Settings", "DefaultPlayerLimit", (byte)8);
+            Settings.SliderLimit = Config.Bind("Settings", "SliderLimit", (byte)8);
+            Settings.ChairStartEnabled = Config.Bind("Settings", "ChairStartEnabled", true);
             Harmony.PatchAll();
-            Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is patched!");
+            Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         }
     }
 }
