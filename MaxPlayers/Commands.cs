@@ -1,5 +1,6 @@
 ﻿using Gameplay.Quests;
 using Photon.Pun;
+using System.Collections.Generic;
 using VoidManager.Chat.Router;
 using VoidManager.Utilities;
 
@@ -43,14 +44,22 @@ namespace MaxPlayers
 
     internal class StartQuest : ChatCommand
     {
-        public static bool ToldToStart = false;
+        public static bool ToldToStart { get; set; } = false;
+
         public override string[] CommandAliases()
             => new string[] { "startquest", "sq" };
 
         public override string Description()
-            => "Starts the session hub count down.";
+            => "Starts the session hub count down. Use \"now\" argument to begin immediately";
 
-        public override void Execute(string arguments)
+        static List<Argument> arguments = new List<Argument>() { new Argument("now") };
+
+        public override List<Argument> Arguments()
+        {
+            return arguments;
+        }
+
+        internal static void ExecuteStartQuest()
         {
             if (!PhotonNetwork.InRoom || !PhotonNetwork.IsMasterClient) return;
             {
@@ -62,6 +71,19 @@ namespace MaxPlayers
             }
             ToldToStart = !ToldToStart;
             HubQuestManager.Instance.QuestStartProcess.StartProcess();
+        }
+
+        public override void Execute(string arguments)
+        {
+            if (arguments.StartsWith("now", System.StringComparison.OrdinalIgnoreCase))
+            {
+                Messaging.Echo("Starting Quest Now.", false);
+                HubQuestManager.Instance.StartQuest(HubQuestManager.Instance.SelectedQuest);
+            }
+            else
+            {
+                ExecuteStartQuest();
+            }
         }
     }
 }
