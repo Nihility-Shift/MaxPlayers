@@ -12,7 +12,7 @@ namespace MaxPlayers.Patches
     internal class DefaultSessionMaxPlayers
     {
         private static FieldInfo activeGameSessioninfo = AccessTools.Field(typeof(GameSessionManager), "activeGameSession");
-        [HarmonyPrefix]
+        [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> Replacement(IEnumerable<CodeInstruction> instructions)
         {
             CodeInstruction[] targetSequence = new CodeInstruction[]

@@ -7,6 +7,7 @@ using VoidManager.CustomGUI;
 using VoidManager.Utilities;
 using WebSocketSharp;
 using UnityEngine;
+using Photon.Pun;
 
 namespace MaxPlayers
 {
@@ -33,14 +34,18 @@ namespace MaxPlayers
             {
                 if(int.TryParse(PlayerlimitStr, out int result))
                 {
-                    if(result > 0 && result < 256)
+                    if (!PhotonNetwork.InRoom)
                     {
-                        Limits.PlayerLimit = result;
-                        ErrorText = null;
+                        ErrorText = "<color=red>Error: Cannot change Player Limit while not in room</color>";
+                    }
+                    else if (result <= 0 || result >= 256)
+                    {
+                        ErrorText = "<color=red>Error: Player Limit must be between 1 and 255</color>";
                     }
                     else
                     {
-                        ErrorText = "<color=red>Error: Player Limit must be between 1 and 255</color>";
+                        Limits.PlayerLimit = result;
+                        ErrorText = null;
                     }
                 }
             }
