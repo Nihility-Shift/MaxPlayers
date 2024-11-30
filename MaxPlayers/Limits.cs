@@ -1,4 +1,5 @@
 ﻿using BepInEx.Configuration;
+using Photon.Pun;
 
 namespace MaxPlayers
 {
@@ -28,6 +29,10 @@ namespace MaxPlayers
         {
             get
             {
+                if(!PhotonNetwork.InRoom)
+                {
+                    return 0;
+                }
                 return PhotonService.Instance.GetCurrentPlayerLimit();
             }
             set
