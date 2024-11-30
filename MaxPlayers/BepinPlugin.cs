@@ -17,9 +17,9 @@ namespace MaxPlayers
         {
             // Plugin startup logic
             Log = Logger;
-            Settings.DefaultPlayerLimit = Config.Bind("Settings", "DefaultPlayerLimit", (byte)8);
-            Settings.SliderLimit = Config.Bind("Settings", "SliderLimit", (byte)8);
-            Settings.ChairStartEnabled = Config.Bind("Settings", "ChairStartEnabled", true);
+            Settings.DefaultPlayerLimit = Config.Bind("Settings", "DefaultPlayerLimit", Settings.defaultplayerlimit, "The player limit you'll default to.");
+            Settings.SliderLimit = Config.Bind("Settings", "SliderLimit", Settings.defaultsliderlimit, "How high the slider can slide.");
+            Settings.ChairStartEnabled = Config.Bind("Settings", "ChairStartEnabled", true, "While enabled, players can start a session solely by sitting down. Disable if you want the host to maintain control.");
             Harmony.PatchAll();
             Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
         }

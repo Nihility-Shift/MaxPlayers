@@ -1,6 +1,4 @@
 ﻿using HarmonyLib;
-using System;
-using System.Diagnostics;
 using UI;
 using UI.Settings;
 using UnityEngine.UIElements;

@@ -1,5 +1,4 @@
-﻿using BepInEx.Configuration;
-using Photon.Pun;
+﻿using Photon.Pun;
 
 namespace MaxPlayers
 {

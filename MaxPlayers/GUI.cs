@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Photon.Pun;
+using UnityEngine;
 using VoidManager.CustomGUI;
 using VoidManager.Utilities;
 using WebSocketSharp;
-using UnityEngine;
-using Photon.Pun;
 
 namespace MaxPlayers
 {
@@ -49,6 +44,8 @@ namespace MaxPlayers
                     }
                 }
             }
+
+            GUITools.DrawTextField("Default Player Limit", ref Settings.DefaultPlayerLimit);
         }
 
         public override void OnOpen()
