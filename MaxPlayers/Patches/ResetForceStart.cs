@@ -1,4 +1,4 @@
-﻿using CG.Client.Quests;
+﻿using Gameplay.Quests;
 using HarmonyLib;
 
 namespace MaxPlayers.Patches

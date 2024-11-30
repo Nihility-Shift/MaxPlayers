@@ -23,7 +23,7 @@ namespace MaxPlayers.Patches
         static void GetConfigPrefix(ref int playerCount)
         {
             int MaxDifficultyConfigPlayerCount = 4;
-            foreach( var thing in DifficultyPlayerCountTable.Instance.setups)
+            foreach(var thing in DifficultyPlayerCountTable.Instance.setups)
             {
                 if (thing.playerCount > MaxDifficultyConfigPlayerCount)
                 {

@@ -1,4 +1,4 @@
-﻿using CG.Client.Quests;
+﻿using Gameplay.Quests;
 using HarmonyLib;
 using Photon.Pun;
 using System;
@@ -10,7 +10,6 @@ namespace MaxPlayers.Patches
     [HarmonyPatch(typeof(QuestStartProcess), "UpdateQuestProcess")]
     internal class FourPlayersStartSession
     {
-        public static QuestStartProcess QuestStartProcess { get; private set; } = null;
         private static MethodInfo HasEnoughPlayersToBeginCountdownInfo = AccessTools.Method(typeof(QuestStartProcess), "HasEnoughPlayersToBeginCountdown");
         private static FieldInfo _allPlayersWereInZoneInfo = AccessTools.Field(typeof(QuestStartProcess), "_allPlayersWereInZone");
         private static FieldInfo _timeLeftInfo = AccessTools.Field(typeof(QuestStartProcess), "_timeLeft");
@@ -18,7 +17,6 @@ namespace MaxPlayers.Patches
         [HarmonyPrefix]
         public static bool Replacement(QuestStartProcess __instance, int playersInZoneCount)
         {
-            QuestStartProcess = __instance;
             float max = 30f;
             int count = Math.Min(PhotonNetwork.CurrentRoom.Players.Count, 4);
             float num;

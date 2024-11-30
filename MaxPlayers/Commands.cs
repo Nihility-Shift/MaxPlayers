@@ -1,4 +1,4 @@
-﻿using MaxPlayers.Patches;
+﻿using Gameplay.Quests;
 using Photon.Pun;
 using VoidManager.Chat.Router;
 using VoidManager.Utilities;
@@ -37,7 +37,7 @@ namespace MaxPlayers
             {
                 Limits.PlayerLimit = value;
             }
-            Messaging.Echo($"Player limit: {Limits.PlayerLimit}";
+            Messaging.Echo($"Player limit: {Limits.PlayerLimit}");
         }
     }
 
@@ -61,7 +61,7 @@ namespace MaxPlayers
                 Messaging.Notification("Must have a quest and ship selected.", 10000);
             }
             ToldToStart = !ToldToStart;
-            FourPlayersStartSession.QuestStartProcess.StartProcess();
+            HubQuestManager.Instance.QuestStartProcess.StartProcess();
         }
     }
 }

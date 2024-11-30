@@ -15,7 +15,6 @@
     <AssemblyTitle>Increases the player limit from 4 up to 255.</AssemblyTitle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Patches\FourPlayersStartSession.cs" />
     <Compile Remove="Patches\StackPlayersInCloneTube.cs" />
   </ItemGroup>
   <ItemGroup>
