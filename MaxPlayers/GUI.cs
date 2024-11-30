@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using Gameplay.NPC.AI;
+using Photon.Pun;
 using UnityEngine;
 using VoidManager.CustomGUI;
 using VoidManager.Utilities;
@@ -27,7 +28,7 @@ namespace MaxPlayers
 
             if (GUITools.DrawTextField("Player Limit", ref PlayerlimitStr, Limits.DefaultPlayerLimit.ToString()))
             {
-                if(int.TryParse(PlayerlimitStr, out int result))
+                if (int.TryParse(PlayerlimitStr, out int result))
                 {
                     if (!PhotonNetwork.InRoom)
                     {
@@ -46,6 +47,13 @@ namespace MaxPlayers
             }
 
             GUITools.DrawTextField("Default Player Limit", ref Settings.DefaultPlayerLimit);
+
+            GUITools.DrawCheckbox("Enable down starting from hub", ref Settings.ChairStartEnabled);
+
+            if(PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient && GameSessionManager.InHub && GUILayout.Button("Start Quest"))
+            {
+                StartQuest.ExecuteStartQuest();
+            }
         }
 
         public override void OnOpen()
