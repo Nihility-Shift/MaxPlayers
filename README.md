@@ -20,9 +20,9 @@ Requires:  BepInEx-BepInExPack-5.4.2100, VoidCrewModdingTeam-VoidManager-1.2.4
 
 ### 🎮 Client Usage
 
-- Simply install. Player limit will default to 8.
-- Control slider from any vanilla player limit slider
-- Configure settings at F5 > Mod Settings > Max Players
+- Simply install. Player limit will default to 20.
+- Control slider from any vanilla player limit slider.
+- Configure settings at F5 > Mod Settings > Max Players.
 
 ### 👥 Multiplayer Functionality
 

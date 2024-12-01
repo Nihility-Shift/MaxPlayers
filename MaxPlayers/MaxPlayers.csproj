@@ -12,7 +12,7 @@
       https://nuget.samboy.dev/v3/index.json
     </RestoreAdditionalProjectSources>
     <RootNamespace>MaxPlayers</RootNamespace>
-    <AssemblyTitle>Increases the player limit from 4 up to 255.</AssemblyTitle>
+    <AssemblyTitle>Increases the player limit to 20, with customization.</AssemblyTitle>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Patches\StackPlayersInCloneTube.cs" />
