@@ -72,9 +72,7 @@ namespace MaxPlayers
                 return;
             }
 
-            Messaging.Notification($"ToldToStart: {ToldToStart}");
             ToldToStart = !ToldToStart;
-            Messaging.Notification($"ToldToStart: {ToldToStart}");
 
             if (ToldToStart)
             {
