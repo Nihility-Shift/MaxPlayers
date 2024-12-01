@@ -61,16 +61,30 @@ namespace MaxPlayers
 
         internal static void ExecuteStartQuest()
         {
-            if (!PhotonNetwork.InRoom || !PhotonNetwork.IsMasterClient) return;
+            if (!PhotonNetwork.InRoom || !PhotonNetwork.IsMasterClient) 
             {
                 Messaging.Notification("Must be host to use this command.", 10000);
+                return;
             }
             if (HubQuestManager.Instance.SelectedQuest == null || HubQuestManager.Instance.CurrentShipSelected == null)
             {
                 Messaging.Notification("Must have a quest and ship selected.", 10000);
+                return;
             }
+
+            Messaging.Notification($"ToldToStart: {ToldToStart}");
             ToldToStart = !ToldToStart;
-            HubQuestManager.Instance.QuestStartProcess.StartProcess();
+            Messaging.Notification($"ToldToStart: {ToldToStart}");
+
+            if (ToldToStart)
+            {
+                Messaging.Notification("Starting Countdown at 30 seconds");
+                HubQuestManager.Instance.QuestStartProcess.StartProcess();
+            }
+            else
+            {
+                Messaging.Notification("Stopping Countdown");
+            }
         }
 
         public override void Execute(string arguments)
