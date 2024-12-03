@@ -24,6 +24,15 @@ Requires:  BepInEx-BepInExPack-5.4.2100, VoidCrewModdingTeam-VoidManager-1.2.4
 - Control slider from any vanilla player limit slider.
 - Configure settings at F5 > Mod Settings > Max Players.
 
+#### 💻 Commands
+
+- PlayerCount, pc
+  - Returns the current player count and limit
+- SetPlayerLimit, spl
+  - Assigns the player limit with a given value
+- StartQuest, sq
+  - Starts the currently selected quest. Add argument "now" to skip the countdown. Ex: /startquest now
+
 ### 👥 Multiplayer Functionality
 
 - ✅ All
