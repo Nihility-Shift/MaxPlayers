@@ -4,7 +4,7 @@
 
 # Max Players
 
-Version 1.1.0  
+Version 1.1.1  
 For Game Version 1.0.0  
 Developed by Dragon, Mest  
 Requires:  BepInEx-BepInExPack-5.4.2100, VoidCrewModdingTeam-VoidManager-1.2.4
