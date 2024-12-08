@@ -29,10 +29,10 @@ namespace MaxPlayers.Patches
     { 
         static bool Prefix(HullDamageController __instance, ref HullDamageConfig __result)
         {
-            int num = GameSessionManager.ActiveSession.PlayerCount;
-            if (num > __instance.damageConfigs.Length)
-                num = __instance.damageConfigs.Length - 1;
-            __result = __instance.damageConfigs[num];
+            int PlayerCount = GameSessionManager.ActiveSession.PlayerCount;
+            if (PlayerCount > __instance.damageConfigs.Length)
+                PlayerCount = __instance.damageConfigs.Length;
+            __result = __instance.damageConfigs[PlayerCount - 1];
             return false;
         }
     }
