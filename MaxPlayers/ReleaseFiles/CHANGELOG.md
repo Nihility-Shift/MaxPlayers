@@ -1,3 +1,6 @@
+## 1.1.3
+- Updated for Void Crew 1.1.0
+
 ## 1.1.2
 - Fixed issue with hull damage at player counts of 4
 

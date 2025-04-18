@@ -4,8 +4,6 @@ namespace MaxPlayers
 {
     internal class Limits
     {
-
-
         public static int DefaultPlayerLimit
         {
             get

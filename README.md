@@ -7,7 +7,7 @@
 Version 1.1.2  
 For Game Version 1.0.1  
 Developed by Dragon, Mest  
-Requires:  BepInEx-BepInExPack-5.4.2100, VoidCrewModdingTeam-VoidManager-1.2.4
+Requires:  BepInEx-BepInExPack-5.4.2100, NihilityShift-VoidManager-1.2.8
 
 
 ---------------------
