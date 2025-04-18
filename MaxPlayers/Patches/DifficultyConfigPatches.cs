@@ -1,5 +1,4 @@
-﻿using CG.Ship.Repair;
-using Gameplay.MissionDifficulty;
+﻿using Gameplay.MissionDifficulty;
 using HarmonyLib;
 
 namespace MaxPlayers.Patches
@@ -10,7 +9,7 @@ namespace MaxPlayers.Patches
         [HarmonyPrefix]
         static void GetConfigPrefix(ref int playerCount)
         {
-            int MaxDifficultyConfigPlayerCount = 4;
+            int MaxDifficultyConfigPlayerCount = 6;
             
             foreach (var thing in DifficultyPlayerCountTable.Instance.setups)
             {
@@ -20,20 +19,6 @@ namespace MaxPlayers.Patches
 
             if (playerCount > MaxDifficultyConfigPlayerCount)
                 playerCount = MaxDifficultyConfigPlayerCount;
-        }
-    }
-
-    // Original code minus error logs.
-    [HarmonyPatch(typeof(HullDamageController), "Config", MethodType.Getter)]
-    class HullDamageControlerPatch
-    { 
-        static bool Prefix(HullDamageController __instance, ref HullDamageConfig __result)
-        {
-            int PlayerCount = GameSessionManager.ActiveSession.PlayerCount;
-            if (PlayerCount > __instance.damageConfigs.Length)
-                PlayerCount = __instance.damageConfigs.Length;
-            __result = __instance.damageConfigs[PlayerCount - 1];
-            return false;
         }
     }
 }
