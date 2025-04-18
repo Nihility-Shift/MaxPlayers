@@ -1,4 +1,4 @@
-﻿using Gameplay.Quests;
+﻿using Gameplay.Hub;
 using HarmonyLib;
 
 namespace MaxPlayers.Patches

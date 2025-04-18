@@ -1,4 +1,4 @@
-﻿using Gameplay.Quests;
+﻿using Gameplay.Hub;
 using Photon.Pun;
 using System.Collections.Generic;
 using VoidManager.Chat.Router;
@@ -66,7 +66,7 @@ namespace MaxPlayers
                 Messaging.Notification("Must be host to use this command.", 10000);
                 return;
             }
-            if (HubQuestManager.Instance.SelectedQuest == null || HubQuestManager.Instance.CurrentShipSelected == null)
+            if (HubQuestManager.Instance.SelectedQuest == null || HubShipManager.Instance.CurrentShipSelected == null)
             {
                 Messaging.Notification("Must have a quest and ship selected.", 10000);
                 return;
@@ -90,7 +90,7 @@ namespace MaxPlayers
             if (arguments.StartsWith("now", System.StringComparison.OrdinalIgnoreCase))
             {
                 Messaging.Echo("Starting Quest Now.", false);
-                HubQuestManager.Instance.StartQuest(HubQuestManager.Instance.SelectedQuest);
+                HubQuestManager.Instance.StartQuest(HubQuestManager.Instance.SelectedQuest, HubQuestManager.Instance.QuestStartType, HubQuestManager.Instance.QuestSeed, HubQuestManager.Instance.ChallengeSeed);
             }
             else
             {
