@@ -18,7 +18,7 @@ namespace MaxPlayers.Patches
             }
 
             float MaxTimeLeft = QuestStartProcess.START_PROCESS_DURATION;
-            int playerCount = Math.Min(PhotonNetwork.CurrentRoom.Players.Count, 4); //Clamp room player count to 4
+            int playerCount = Math.Min(PhotonNetwork.CurrentRoom.Players.Count, 6); //Clamp room player count to 6
             float EmergencyStopAndDelta;
 
             //emergency stop if not told to start and not enough plaeyrs currently in zone to start or continue with start
