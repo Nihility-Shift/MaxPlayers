@@ -49,7 +49,7 @@ namespace MaxPlayers
 
             GUITools.DrawCheckbox("Enable chair starting from hub", ref Settings.ChairStartEnabled);
 
-            if(PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient && GameSessionManager.InHub && GUILayout.Button("Start Quest"))
+            if(PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient && GameSessionManager.HasActiveSession && GameSessionManager.InHub && GUILayout.Button("Start Quest"))
             {
                 StartQuest.ExecuteStartQuest();
             }
