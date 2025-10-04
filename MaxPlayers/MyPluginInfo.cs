@@ -7,7 +7,7 @@ namespace MaxPlayers
         public const string PLUGIN_GUID = $"{PLUGIN_ORIGINAL_AUTHOR}.{PLUGIN_NAME}";
         public const string PLUGIN_NAME = "MaxPlayers";
         public const string USERS_PLUGIN_NAME = "Max Players";
-        public const string PLUGIN_VERSION = "1.1.3";
+        public const string PLUGIN_VERSION = "1.1.4";
         public const string PLUGIN_DESCRIPTION = "Increases the player limit to 8, customizable up to 255.";
         public const string PLUGIN_ORIGINAL_AUTHOR = "NihilityShift";
         public const string PLUGIN_AUTHORS = "Dragon, Mest";
